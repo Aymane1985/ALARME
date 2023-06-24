@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plan de maintenance préventive</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+    <br><br><br>
+  <main class="table">
+    <section class="table__header">
+      <h1>Plan de maintenance préventive</h1>
+      <div class="logo-container">
+        <img src="log.jpg" alt="Logo" class="logo">
+      </div>
+      <p id="date-time"></p>
+      
+      </div>
+
+        <div class="input-group">  
+
+          <div class="select" class="input-group" style="margin-right: 10px;">
+        <select id="selectOption">
+            <option >Choisissez une option</option>
+            <option value="2semaines">Semaine 2</option>
+            <option value="4semaines">Semaine 4</option>
+            <option value="6semaines">Semaine 6</option>
+            <option value="8semaines">Semaine 8</option>
+            <option value="12semaines">Semaine 12</option>
+            <option value="24semaines">Semaine 24</option>
+        </select>
+        <span class="focus"></span>
+    </div>
+    
+    <button onclick="afficherOption()">Afficher</button>
+        </div>
+    
+        
+    </section>
+    <section class="table__body">
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th> Equipement <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Nom <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Outil <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Temps d'arrêt <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Cycle <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Statut <span class="icon-arrow">&UpArrow;</span></th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">               
+            </tbody>
+        </table>
+    </section>
+  </main>
+
+  <script>
+    
+    function getCurrentDateTime() {
+      var currentDate = new Date();
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+      return currentDate.toLocaleDateString('fr-FR', options);
+    }
+
+  
+    function updateDateTime() {
+      var dateTimeElement = document.getElementById('date-time');
+      if (dateTimeElement) {
+        dateTimeElement.innerHTML = getCurrentDateTime();
+      }
+    }
+
+
+    updateDateTime();
+
+  
+    setInterval(updateDateTime, 1000);
+   
+    function afficherOption() {
+
+        var operations = {
+            'operation 1': {equipement: 'Structure',name: 'Structure: Vérifier la condition de la structure',tool: '-',stoptime: '30min',cycle: '24semaines', statut: 'AHT'},
+            'operation 2': {equipement:'Structure' ,name:'Structure:Rechercher des fissures ou autre détérioration du châssis ', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 3':{equipement:'Moteur' ,name:'Moteur(Groupe de commande):Rechercher les bruits anormaux ou vibrations en excés', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 4':{equipement:'Moteur' ,name:'Moteur(Groupe de commande):Vérifier la température', tool:'Sonde thermique', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 5':{equipement:'Moteur' ,name:'Moteur(Groupe de commande):Vérifier l-état et l-ajustement de toutes les connexions', tool:'Tournevis', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 6':{equipement:'Moteur' ,name:'Moteur(Groupe de commande):Vérifier et enregistrer le courant tiré du moteur', tool:'Pince ampèremétrique', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 7':{equipement:'Moteur' ,name:'Moteur(Groupe de commande):Nettoyer les bobinages et le carter avec l-air sous pression', tool:'-', stoptime:'15min', cycle: '12semaines' , statut: 'AHT'},
+            'operation 8':{equipement:'Chaine 08b1' ,name:'Chaine 08b1(Groupe de commande):Vérifier l-usure des chaines', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 9':{equipement:'Chaine 08b1' ,name:'Chaine 08b1(Groupe de commande):Vérifier le tension de la chaine', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AST'},
+            'operation 10':{equipement:'Chaine 08b1' ,name:'Chaine 08b1(Groupe de commande):Vérifier l-alignement des pignons et le serrage des fixations', tool:'Clé dynamométrique', stoptime:'15min', cycle: '4semaines' , statut: 'AST'},
+            'operation 11':{equipement:'Chaine 08b1' ,name:'Chaine 08b1(Groupe de commande): Nettoyer les courroies si nécessaire', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AST'},
+            'operation 12':{equipement:'Pignons entraînement' ,name:'Pignons entraînement(Groupe de commande):Vérifier l-usure', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 13':{equipement:'Chaine catepillar' ,name:'Chaine catepillar(Groupe de commande):Vérifier le relâchement', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AST'},
+            'operation 14':{equipement:'Chaine catepillar' ,name:'Chaine catepillar(Groupe de commande):Vérifier l-alignement', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AST'},
+            'operation 15':{equipement:'Chaine catepillar' ,name:'Chaine catepillar(Groupe de commande):Vérifier la lubrification', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AST'},
+            'operation 16':{equipement:'Chaine catepillar' ,name:'Chaine catepillar(Groupe de commande):Vérifier la propreté', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 17':{equipement:'Barre de recul' ,name:'Barre de recul(Groupe de commande):Vérifier l-usure', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 18':{equipement:'Barre de recul' ,name:'Barre de recul(Groupe de commande):Vérifier l-alignement', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AST'},
+            'operation 19':{equipement:'Assemblage entraînement et pignon' ,name:'Assemblage entraînement et pignon(Groupe de commande):Vérifier l-état et l-alignement', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AHT' },
+            'operation 20':{equipement:'Assemblage entraînement et pignon' ,name:'Assemblage entraînement et pignon(Groupe de commande):Vérifier la lubrification d-unité coulissante', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AST'},
+            'operation 21':{equipement:'Assemblage entraînement et pignon' ,name:'Assemblage entrînement et pignon(Groupe de commande):Lubrifier les roulements de moyeu et entraînement', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AST'},
+            'operation 22':{equipement:'Chaîne mécanique' ,name:'Chaîne mécanique:Vérifier le relâchement de la chaîne', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 23':{equipement:'Chaîne mécanique' ,name:'Chaîne mécanique:Vérifier la tension de chaîne excessive pouvant être causée par une pression pneumatique excessive au entraînement du convoyeur' , tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 24':{equipement:'Chaîne mécanique' ,name:'Chaîne mécanique:Rechercher une saute de la chaîne', tool:'-', stoptime:'15min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 25':{equipement:'Chaîne mécanique' ,name:'Chaîne mécanique:Mesurer et enregistrer la longueur de section de chaîne', tool:'-', stoptime:'15min', cycle: '12semaines' , statut: 'AST'},
+            'operation 26':{equipement:'Chaîne mécanique' ,name:'Chaîne mécanique:Vérifier la lubrification correcte', tool:'-', stoptime:'15min', cycle: '8semaines' , statut: 'AHT'},
+            'operation 27':{equipement:'Chaîne mécanique' ,name:'Chaîne mécanique:Vérifier les tétons poussoirs pour l-usure excessive et remplacer si nécessaire', tool:'-', stoptime:'15min', cycle: '12semaines' , statut: 'AST'},
+            'operation 28':{equipement:'Chariots' ,name:'Chariots(Chaîne):Vérifier que les roues de charriots ne sont pas grippées et remplacer si nécessaire', tool:'-', stoptime:'15min', cycle: '8semaines' , statut: 'AST'},
+            'operation 29':{equipement:'Chariots' ,name:'Chariots(Chaîne):Rechercher les bruits unusuels des roues de chariots indiquant un défaut de lubrification ou des roulements usés ou abîmés', tool:'-', stoptime:'15min', cycle: '6semaines' , statut: 'AHT'},
+            'operation 30':{equipement:'Chariots' ,name:'Chariots(Chaîne):Rechercher des fixations de chariot tordues.Toujours remplacer les fixations de chariot tordues, ne pas essayer de les réparer', tool:'-', stoptime:'15min', cycle: '6semaines' , statut: 'AST'},
+            'operation 31':{equipement:'Chariots',name:'Chariots(Chaîne):Rechercher les boulons de supports désserrés.Serrage au couple selon le schéma', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 32':{equipement:'Chariots',name:'Chariots(Chaîne):Vérifier et lubrifier à nouveau si nécessaire', tool:'-', stoptime:'15min', cycle: '6semaines' , statut: 'AST'},
+            'operation 33':{equipement:'Chaine',name:'Chaine(système de tension):Vérifier le relâchement excessif de la chaîne du convoyeur en entrée et à la sortie de groupe de tension', tool:'-', stoptime:'5min', cycle: '2semaines' , statut: 'AHT'},
+            'operation 34':{equipement:'Chaine',name:'Chaine(système de tension):Rechercher les bruits unusuels de la chaîne du convoyeur', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 35':{equipement:'Circuit pneumatique',name:'Circuit pneumatique(système de tension):Rechercher les fuites d-air', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 36':{equipement:'Circuit pneumatique',name:'Circuit pneumatique(système de tension):Vérifier l-apparence et l-usure de la tige du vérin', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 37':{equipement:'Circuit pneumatique',name:'Circuit pneumatique(système de tension):Vérifier et resserrer les raccords pneumatiques.', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 38':{equipement:'Circuit pneumatique',name:'Circuit pneumatique(système de tension):Vérifier la condition des tuyaux', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 39':{equipement:'Cadre',name:'Cadre(système de tension):Vérifier visuellement l-alignement des chaînes sur rouleaux', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AHT'},
+            'operation 40':{equipement:'Boulons & écrous',name:'Boulons & écrous(Balancelle):Vérifier le jeu et le serrage', tool:'-', stoptime:'90min', cycle: '6semaines' , statut: 'AST'},
+            'operation 41':{equipement:'Articulations',name:'Articulations(Balancelle):Vérifier l-usure', tool:'-', stoptime:'20min', cycle: '6semaines' , statut: 'AST'},
+            'operation 42':{equipement:'Retaquage',name:'Retaquage(Balancelle):Vérifier le serrage et le connexion', tool:'-', stoptime:'30min', cycle: '8semaines' , statut: 'AHT'},
+            'operation 43':{equipement:'Charge des roues',name:'Charge des roues(Chariots BIRAIL):Vérifier le jeu', tool:'-', stoptime:'5min', cycle: '8semaines' , statut: 'AST'},
+            'operation 44':{equipement:'Charge des roues',name:'Charge des roues(Chariots BIRAIL):Vérifier la lubrification', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AST'},
+            'operation 45':{equipement:'Charge des roues',name:'Charge des roues(Chariots BIRAIL):Vérifier l-extérieur pour traces d-abrasion', tool:'-', stoptime:'5min', cycle: '8semaines' , statut: 'AST'},
+            'operation 46':{equipement:'Guide de roues',name:'Guide de roues(Chariots BIRAIL):Vérifier le jeu.', tool:'-', stoptime:'5min', cycle: '8semaines' , statut: 'AST'},
+            'operation 47':{equipement:'Guide de roues',name:'Guide de roues(Chariots BIRAIL):Vérifier la lubrification', tool:'-', stoptime:'5min', cycle: '4semaines' , statut: 'AST'},
+            'operation 48':{equipement:'Guide de roues',name:'Guide de roues(Chariots BIRAIL):Vérifier l-extérieur pour traces d-abrasion', tool:'-', stoptime:'5min', cycle: '8semaines' , statut: 'AST'},
+            'operation 49':{equipement:'Fixation de chariot',name:'Fixation de chariot(Chariots BIRAIL):Rechercher la déformation des trous d-axe de pivotement des barres de charge / remorquage', tool:'-', stoptime:'5min', cycle: '8semaines' , statut: 'AST'},  
+        };
+        var tbody = document.getElementById("myTable").getElementsByTagName("tbody")[0];
+        var select = document.getElementById("selectOption");
+        var optionSelectionnee = select.value;
+        var tbody = document.getElementById("tableBody");
+        tbody.innerHTML = ""; // Effacer le contenu précédent du tableau
+
+      for (var operation in operations) {
+        if (operations[operation].cycle === optionSelectionnee) {
+
+          var equipement = operations[operation].equipement;
+          var name = operations[operation].name;
+          var tool = operations[operation].tool;
+          var stoptime = operations[operation].stoptime;
+          var cycle = operations[operation].cycle;
+          var statut = operations[operation].statut;
+
+          var row = tbody.insertRow();
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+          var cell3 = row.insertCell(2);
+          var cell4 = row.insertCell(3);
+          var cell5 = row.insertCell(4);
+          var cell6 = row.insertCell(5);
+
+          cell1.innerHTML = equipement;
+          cell2.innerHTML = name;
+          cell3.innerHTML = tool;
+          cell4.innerHTML = stoptime;
+          cell5.innerHTML = cycle;
+          cell6.innerHTML = statut;
+        }
+      }
+    };
+  </script>
+</body>
+</html>
